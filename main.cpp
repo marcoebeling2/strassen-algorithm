@@ -144,6 +144,7 @@ int main(){
         delete [] divideM[i];
     }
     delete [] divideM;
+    
 
     // compute strassen
     s2 = clock();
