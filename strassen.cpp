@@ -5,23 +5,12 @@
 #include <cstring>
 #include <fstream>
 #include <time.h>
-//#include <./stressen.h>
+#include "strassen.h"
 
 
 using namespace std;
 
-
-void naiveApproach(int** outM, int** m1, int** m2, int size);
-void divideAndConquer(int** outM, int** m1, int** m2, int size);
-void splitIntoFour(int** m1, int** a, int**b, int** c, int** d, int size);
-void printMatrix(int** m, int size);
 void printMatrix(ofstream &ofStr, int** m, int size);
-void matrixAdd(int** outM, int** m1, int** m2, int size);
-void matrixSubtract(int** outM, int** m1, int** m2, int size);
-void matrixCombine(int** outM, int** C11, int** C12, int** C21, int** C22, int inSize);
-void strassen(int** outM, int** m1, int** m2, int size);
-
-
 
 void naiveApproach(int** outM, int** m1, int** m2, int size){
     // assume a square matrix

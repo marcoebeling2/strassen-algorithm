@@ -5,20 +5,12 @@
 #include <cstring>
 #include <fstream>
 #include <time.h>
-//#include <./stressen.h>
+#include "strassen.h"
 
 
 using namespace std;
 
-void naiveApproach(int** outM, int** m1, int** m2, int size);
-void divideAndConquer(int** outM, int** m1, int** m2, int size);
-void splitIntoFour(int** m1, int** a, int**b, int** c, int** d, int size);
-void printMatrix(int** m, int size);
 void printMatrix(ofstream &ofStr, int** m, int size);
-void matrixAdd(int** outM, int** m1, int** m2, int size);
-void matrixSubtract(int** outM, int** m1, int** m2, int size);
-void matrixCombine(int** outM, int** C11, int** C12, int** C21, int** C22, int inSize);
-void strassen(int** outM, int** m1, int** m2, int size);
 
 
 int main(){
@@ -117,10 +109,17 @@ int main(){
     ifStr.close();
 
     // create time objects
-    time_t s1, e1, s2, e2;
+    time_t s0, e0, s1, e1, s2, e2;
 
-    // compute through naive approach and print
+    // make ofstream to print
+    ofstream ofStr0;
+    ofStr0.open("brute_force.txt");
+
+    s0 = clock();
+    // compute through naive approach
     naiveApproach(naiveM, m1, m2, size);
+    e0 = clock();
+    printMatrix(ofStr0, naiveM, n);
 
     // delete naiveM
     for (int i = 0; i < size; i++){
@@ -135,7 +134,7 @@ int main(){
     e1 = clock();
     // make ofstream to print to
     ofstream ofStr1;
-    ofStr1.open("output_m1.txt");
+    ofStr1.open("divide_and_conquer.txt");
     printMatrix(ofStr1, divideM, n);
     // close ofstr1
     ofStr1.close();
@@ -152,7 +151,7 @@ int main(){
     e2 = clock();
     // make ofStr to print output
     ofstream ofStr2;
-    ofStr1.open("output_m2.txt");
+    ofStr1.open("strassen.txt");
     printMatrix(ofStr1, strassenM, n);
     // close ofstr1
     ofStr2.close();
@@ -173,8 +172,9 @@ int main(){
 
     // create an ofstream for the time
     ofstream ofStr3;
-    ofStr3.open("output_q3.txt");
-    ofStr3 << e1 - s1 << " " << e2 - s2 << endl;
+    ofStr3.open("run_time.txt");
+    ofStr3 << e0 - s0 << " " << e1 - s1 << " " << e2 - s2 << endl;
+    ofStr3.close();
 
 
 
